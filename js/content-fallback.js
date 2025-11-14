@@ -74,7 +74,7 @@ window.CONTENT_FALLBACK = {
   ],
   "unite": {
     "titulo": "Unite al Club",
-    "descripcion": "Formar parte del Club Fiat 600 Córdoba es sumar tu historia a una comunidad que comparte repuestos, conocimientos y viajes inolvidables. No importa si tenés tu Fitito listo, en restauración o en proyecto.",
+    "descripcion": "Formar parte del Club Fiat 600 Córdoba es sumar tu historia a una comunidad que comparte repuestos, conocimientos y viajes inolvidables. Este formulario funciona como contacto inicial: nos contás quién sos y coordinamos el siguiente paso.",
     "beneficios_exclusivos": {
       "titulo": "Beneficios exclusivos",
       "items": [
@@ -93,7 +93,7 @@ window.CONTENT_FALLBACK = {
       ]
     },
     "formulario": {
-      "action": "https://formspree.io/f/tu-endpoint",
+      "action": "https://formsubmit.co/contacto@clubfiat600cba.com",
       "method": "POST"
     }
   }

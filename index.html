@@ -25,6 +25,7 @@
   <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
+  <a class="skip-link" href="#historia">Saltar al contenido principal</a>
   <header id="inicio">
     <div class="hero-inner">
       <div class="hero-title">
@@ -155,6 +156,19 @@
           y viajes inolvidables. No importa si tenés tu Fitito listo, en restauración o en proyecto.
         </p>
 
+        <div class="contact-callouts" data-aos="fade-up" data-aos-delay="100" role="complementary" aria-label="Canales directos de contacto">
+          <article class="contact-callout">
+            <span class="contact-callout__label">Correo directo</span>
+            <a class="contact-callout__value" href="mailto:contacto@clubfiat600cba.com">contacto@clubfiat600cba.com</a>
+            <p class="contact-callout__hint">Las consultas llegan a la comisión y se responden dentro de las 48 hs hábiles.</p>
+          </article>
+          <article class="contact-callout">
+            <span class="contact-callout__label">Próxima reunión abierta</span>
+            <p class="contact-callout__value">Primer domingo de cada mes · 17:00 hs</p>
+            <p class="contact-callout__hint">Frente al Holiday Inn · Alto Verde · Córdoba · Argentina</p>
+          </article>
+        </div>
+
         <div class="beneficios" data-aos="fade-up" data-aos-delay="150">
           <div class="beneficio" data-content-key="beneficios_exclusivos">
             <h3>Beneficios exclusivos</h3>
@@ -174,17 +188,58 @@
           </div>
         </div>
 
-        <form action="https://formspree.io/f/tu-endpoint" method="POST" data-aos="fade-up" data-aos-delay="250">
-          <label for="nombre">Nombre y apellido *</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+        <form action="https://formsubmit.co/contacto@clubfiat600cba.com" method="POST" data-aos="fade-up" data-aos-delay="250" aria-describedby="contact-form-note">
+          <p class="form-intro">
+            Este es el primer paso para conocerte. La información llega directamente al correo oficial del club y alguien de la comisión se contactará con vos.
+          </p>
 
-          <label for="email">Correo electrónico *</label>
-          <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="nombre">Nombre y apellido *</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" autocomplete="name" required>
+            </div>
+            <div class="form-field">
+              <label for="email">Correo electrónico *</label>
+              <input type="email" id="email" name="email" placeholder="tu@correo.com" autocomplete="email" required>
+            </div>
+          </div>
 
-          <label for="mensaje">¿Por qué querés unirte? *</label>
-          <textarea id="mensaje" name="mensaje" placeholder="Contanos tu historia con el Fitito" required></textarea>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="telefono">Teléfono o WhatsApp</label>
+              <input type="tel" id="telefono" name="telefono" placeholder="+54 9 351..." autocomplete="tel">
+            </div>
+            <div class="form-field">
+              <label for="ciudad">Ciudad / Provincia *</label>
+              <input type="text" id="ciudad" name="ciudad" placeholder="Río Ceballos, Córdoba" autocomplete="address-level2" required>
+            </div>
+          </div>
 
-          <button type="submit">Enviar solicitud</button>
+          <div class="form-field">
+            <label for="estado">Estado de tu Fiat 600</label>
+            <select id="estado" name="estado">
+              <option value="">Elegí una opción</option>
+              <option value="en-marcha">En marcha y participando</option>
+              <option value="en-restauracion">En restauración</option>
+              <option value="buscando-uno">Buscando comprar uno</option>
+              <option value="acompanante">Acompaño la movida</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="mensaje">Contanos sobre vos *</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Compartí una breve historia, qué te gustaría sumar al club o qué ayuda necesitás" required></textarea>
+          </div>
+
+          <p class="form-note" id="contact-form-note" aria-live="polite">
+            Al enviar confirmás que tus datos se remiten a <strong>contacto@clubfiat600cba.com</strong> y los respondemos dentro de las próximas 48 hs hábiles.
+          </p>
+
+          <input type="hidden" name="_subject" value="Nuevo contacto inicial - Club Fiat 600 Córdoba">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+
+          <button type="submit">Enviar contacto</button>
         </form>
       </div>
     </section>
