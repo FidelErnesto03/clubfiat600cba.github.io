@@ -10,18 +10,6 @@
     }
   }
 
-  function configurarLightbox() {
-    if (window.lightbox) {
-      lightbox.option({
-        albumLabel: 'Imagen %1 de %2',
-        fadeDuration: 200,
-        imageFadeDuration: 200,
-        resizeDuration: 200,
-        wrapAround: true
-      });
-    }
-  }
-
   function prepararFallbacksDeImagen() {
     document.querySelectorAll('img[data-fallback]').forEach(function (imagen) {
       imagen.addEventListener('error', function handleError() {
@@ -52,15 +40,15 @@
     var sentinel = document.createElement('div');
     sentinel.className = 'hero-nav-sentinel';
     sentinel.setAttribute('aria-hidden', 'true');
-    nav.insertAdjacentElement('afterend', sentinel);
+    nav.insertAdjacentElement('beforebegin', sentinel);
 
     var placeholder = document.createElement('div');
     placeholder.className = 'hero-nav-placeholder';
     placeholder.setAttribute('aria-hidden', 'true');
-    sentinel.insertAdjacentElement('afterend', placeholder);
+    nav.insertAdjacentElement('afterend', placeholder);
 
     function actualizarAlturaPlaceholder() {
-      placeholder.style.height = (nav.offsetHeight + 16) + 'px';
+      placeholder.style.height = (nav.offsetHeight + 24) + 'px';
     }
 
     actualizarAlturaPlaceholder();
@@ -78,17 +66,13 @@
       });
     }, {
       threshold: 0,
-      rootMargin: '-8px 0px 0px 0px'
+      rootMargin: '-160px 0px 0px 0px'
     });
 
     observer.observe(sentinel);
   }
 
   function resaltarSeccionActiva() {
-    if (!('IntersectionObserver' in window)) {
-      return;
-    }
-
     var navLinks = Array.prototype.slice.call(document.querySelectorAll('.hero-nav a[href^="#"]'));
     if (navLinks.length === 0) {
       return;
@@ -105,7 +89,13 @@
       return;
     }
 
+    var ultimaSeccionActiva = null;
+
     function setActiveSection(idActivo) {
+      if (!idActivo || idActivo === ultimaSeccionActiva) {
+        return;
+      }
+      ultimaSeccionActiva = idActivo;
       navLinks.forEach(function (link) {
         var coincide = link.getAttribute('href').replace('#', '') === idActivo;
         link.classList.toggle('is-active', coincide);
@@ -117,29 +107,132 @@
       });
     }
 
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+    function calcularSeccionActiva() {
+      var nav = document.querySelector('.hero-nav');
+      var navHeight = nav ? nav.getBoundingClientRect().height : 0;
+      var offsetReferencia = window.scrollY + navHeight + 32;
+      var activa = secciones[0].id;
+
+      // Si estamos muy cerca del top, activar "inicio"
+      if (window.scrollY < 50) {
+        activa = 'inicio';
+      } else {
+        for (var i = 0; i < secciones.length; i++) {
+          var section = secciones[i];
+          if (!section) {
+            continue;
+          }
+          var seccionTop = section.offsetTop;
+          // Hacer más sensible la activación de "historia"
+          var margenActivacion = i === 0 ? 20 : 4; // Más margen para la primera sección
+          if (offsetReferencia >= seccionTop - margenActivacion) {
+            activa = section.id;
+          } else {
+            break;
+          }
+        }
+      }
+
+      setActiveSection(activa);
+    }
+
+    // Función mejorada para scroll programático
+    function calcularSeccionActivaProgramatica(scrollTarget) {
+      var nav = document.querySelector('.hero-nav');
+      var navHeight = nav ? nav.getBoundingClientRect().height : 0;
+      var offsetReferencia = (scrollTarget || window.scrollY) + navHeight + 32;
+      var activa = secciones[0].id;
+
+      // Si el scroll es al inicio (0), activar la sección "inicio"
+      if (scrollTarget === 0 || scrollTarget < 100) {
+        activa = 'inicio';
+      } else {
+        for (var i = 0; i < secciones.length; i++) {
+          var section = secciones[i];
+          if (!section) {
+            continue;
+          }
+          var seccionTop = section.offsetTop;
+          // Hacer más sensible la activación de "historia"
+          var margenActivacion = i === 0 ? 20 : 4; // Más margen para la primera sección
+          if (offsetReferencia >= seccionTop - margenActivacion) {
+            activa = section.id;
+          } else {
+            break;
+          }
+        }
+      }
+
+      setActiveSection(activa);
+    }
+
+    window.addEventListener('scroll', calcularSeccionActiva, { passive: true });
+    window.addEventListener('resize', calcularSeccionActiva);
+    calcularSeccionActiva();
+  }
+
+  function habilitarScrollSuaveEnNav() {
+    var enlaces = Array.prototype.slice.call(document.querySelectorAll('.hero-nav a[href^="#"]'));
+    if (enlaces.length === 0) {
+      return;
+    }
+
+    enlaces.forEach(function (enlace) {
+      enlace.addEventListener('click', function (event) {
+        var destinoId = enlace.getAttribute('href');
+        if (!destinoId || destinoId === '#') {
+          return;
+        }
+
+        var destino = document.querySelector(destinoId);
+        if (!destino) {
+          return;
+        }
+
+        event.preventDefault();
+
+        // Calcular offset preciso
+        var nav = document.querySelector('.hero-nav');
+        var navHeight = nav ? nav.getBoundingClientRect().height : 0;
+
+        // Manejo especial para la sección "Inicio" (header)
+        var esInicio = destinoId === '#inicio';
+        var scrollMargin = esInicio ? 0 : parseInt(getComputedStyle(destino).scrollMarginTop) || 96;
+        var destinoTop = destino.getBoundingClientRect().top + window.pageYOffset;
+
+        // Usar el mayor entre navHeight y scrollMargin
+        var offsetCalculado = Math.max(navHeight, scrollMargin);
+        var offset = esInicio ? 0 : Math.max(destinoTop - offsetCalculado - 16, 0);
+
+        window.scrollTo({
+          top: offset,
+          behavior: 'smooth'
+        });
+
+        // Calcular inmediatamente la sección activa usando el offset objetivo
+        if (typeof calcularSeccionActivaProgramatica === 'function') {
+          calcularSeccionActivaProgramatica(offset);
+        }
+
+        // Recalcular después del scroll para sincronización final
+        setTimeout(function() {
+          if (typeof calcularSeccionActiva === 'function') {
+            calcularSeccionActiva();
+          }
+        }, 600); // Tiempo aproximado del scroll suave
+
+        if (window.history && typeof window.history.pushState === 'function') {
+          window.history.pushState(null, '', destinoId);
         }
       });
-    }, {
-      rootMargin: '-45% 0px -45% 0px',
-      threshold: 0
     });
-
-    secciones.forEach(function (section) {
-      observer.observe(section);
-    });
-
-    setActiveSection(secciones[0].id);
   }
 
   document.addEventListener('DOMContentLoaded', function () {
     inicializarAOS();
-    configurarLightbox();
     prepararFallbacksDeImagen();
     configurarNavFlotante();
     resaltarSeccionActiva();
+    habilitarScrollSuaveEnNav();
   });
 })();

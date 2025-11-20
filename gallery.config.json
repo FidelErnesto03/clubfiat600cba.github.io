@@ -1,0 +1,77 @@
+[
+  {
+    "id": "club",
+    "titulo": "Encuentros oficiales",
+    "descripcion": "Reuniones mensuales, jornadas solidarias y momentos íntimos en la sede del club.",
+    "directorio": "images/club",
+    "caption_prefix": "Club Fiat 600 Córdoba",
+    "metadata": {
+      "IMG-20251011-WA0128.jpg": {
+        "historia": "Fila de Fititos saliendo del Club del Chañar rumbo a la caravana aniversario.",
+        "lugar": "Club del Chañar · Río Ceballos",
+        "fecha": "11 oct 2024"
+      },
+      "IMG-20251011-WA0136.jpg": {
+        "historia": "Mateada en el Mirador del Parque Sarmiento antes de bajar juntos al centro.",
+        "lugar": "Mirador Parque Sarmiento · Córdoba",
+        "fecha": "11 oct 2024"
+      },
+      "IMG-20251013-WA0284.jpg": {
+        "historia": "Rodeamos el reloj cucú de Carlos Paz con más de 70 autos para celebrar los 25 años del club.",
+        "lugar": "Villa Carlos Paz",
+        "fecha": "13 oct 2024"
+      },
+      "IMG_20251012_122725.jpg": {
+        "historia": "Clínica de carburación abierta antes de la caravana serrana.",
+        "lugar": "Club del Chañar · Río Ceballos",
+        "fecha": "12 oct 2024"
+      },
+      "IMG_20251012_124644.jpg": {
+        "historia": "Charlas mecánicas entre generaciones compartiendo planos y anécdotas.",
+        "lugar": "Club del Chañar · Río Ceballos",
+        "fecha": "12 oct 2024"
+      },
+      "IMG_20251012_150155_SR.jpg": {
+        "historia": "Convoy trepando las Sierras Chicas rumbo a Río Ceballos.",
+        "lugar": "Camino del Peregrino · Sierras Chicas",
+        "fecha": "12 oct 2024"
+      },
+      "IMG_20251012_181510.jpg": {
+        "historia": "Picnic y peña al caer la tarde después de la rodada solidaria.",
+        "lugar": "Camping Municipal · Río Ceballos",
+        "fecha": "12 oct 2024"
+      },
+      "vcp-2025-01.jpg": {
+        "historia": "Convoy bordeando el lago San Roque en la previa del Encuentro Nacional.",
+        "lugar": "Villa Carlos Paz",
+        "fecha": "15 mar 2025"
+      }
+    }
+  },
+  {
+    "id": "eventos",
+    "titulo": "Caravanas y eventos",
+    "descripcion": "Caravanas por la provincia, participaciones en festivales y encuentros nacionales.",
+    "directorio": "images/eventos",
+    "caption_prefix": "Eventos del Club Fiat 600",
+    "metadata": {
+      "OLDvcp-2025-01.jpg": {
+        "historia": "Caravana solidaria rumbo a Villa General Belgrano con banderas y donaciones.",
+        "lugar": "Villa General Belgrano",
+        "fecha": "2 sep 2023"
+      },
+      "vcp-2025-01.jpg": {
+        "historia": "Llegada escoltada a la costanera de Carlos Paz para la muestra estática.",
+        "lugar": "Villa Carlos Paz",
+        "fecha": "15 mar 2024"
+      }
+    }
+  },
+  {
+    "id": "autos",
+    "titulo": "Nuestros fititos",
+    "descripcion": "Restauraciones, personalizaciones y joyas originales de los socios.",
+    "directorio": "images/autos",
+    "caption_prefix": "Fitito en foco"
+  }
+]

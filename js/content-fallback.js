@@ -46,6 +46,50 @@ window.CONTENT_FALLBACK = {
     ],
     "cierre": "En 2025 celebramos 25 años, honrando la historia del Fiat 600, disfrutando su compañía en las rutas y trabajando para que siga rodando muchos años más."
   },
+  "fitito_cordobes": {
+    "eyebrow": "Identidad cordobesa",
+    "titulo": "El Fitito cordobés",
+    "intro": "En Córdoba el Fiat 600 encontró un escenario perfecto: trepó las sierras, acompañó caravanas solidarias y se transformó en patrimonio afectivo. Nuestros Fititos llevan calcos, defensas y relatos propios que nacen en estos caminos.",
+    "highlights": [
+      {
+        "titulo": "Hecho para subir y bajar sierras",
+        "texto": "Desde los años 70 las caravanas cordobesas preparan relaciones cortas y ventilaciones extra para que el 600 soporte las pendientes de Camino de las Altas Cumbres.",
+        "detalle": "Los socios comparten planos y piezas impresas en 3D para no perder el pulso original."
+      },
+      {
+        "titulo": "Encuentros frente al lago",
+        "texto": "El Parque del Chateau y el Lago San Roque reciben cada año más de 150 Fititos que llegan desde distintos departamentos a la caravana aniversario.",
+        "detalle": "El cordón serrano se vuelve rojo, blanco y amarillo durante el denominado \"Abrazo al San Roque\"."
+      },
+      {
+        "titulo": "Solidarios sobre ruedas",
+        "texto": "Los viajes al interior para llevar donaciones parten en caravanas coordinadas: uno guía, otro escolta y cada coche lleva herramientas para asistir a un compañero.",
+        "detalle": "La consigna es clara: ningún Fitito vuelve solo."
+      }
+    ],
+    "sidebar": {
+      "titulo": "Postales serranas",
+      "items": [
+        {
+          "titulo": "Mirador del Parque Sarmiento",
+          "descripcion": "Punto inicial de reuniones desde 2000: parrillas encendidas, mates y la vista de la ciudad al atardecer."
+        },
+        {
+          "titulo": "El Club del Chañar · Río Ceballos",
+          "descripcion": "Base actual para clínicas de restauración y preparación previa a los encuentros nacionales."
+        },
+        {
+          "titulo": "Caravana del Dique Los Molinos",
+          "descripcion": "40 km bordeando el lago para estrenar motores recién armados antes de los viajes largos."
+        }
+      ]
+    },
+    "footer": "Cada Fitito cordobés lleva una historia de sierras y abrazos. Sumate a la próxima travesía y contanos la tuya.",
+    "cta": {
+      "label": "Quiero rodar con ustedes",
+      "href": "#unite"
+    }
+  },
   "testimonios": [
     {
       "autor": "Carolina Ferreyra · Socia Nº 087",

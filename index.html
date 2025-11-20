@@ -15,9 +15,6 @@
   <!-- Fuentes -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Lightbox2 (galería) -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
-
   <!-- AOS (animaciones) -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
@@ -26,7 +23,7 @@
 </head>
 <body>
   <a class="skip-link" href="#historia">Saltar al contenido principal</a>
-  <header id="inicio">
+  <header id="inicio" class="hero hero--fotografico">
     <div class="hero-inner">
       <div class="hero-title">
         <img src="logo_club.png" alt="Emblema oficial del Club Fiat 600 Córdoba" class="logo-side" loading="lazy">
@@ -39,10 +36,11 @@
       </div>
 
       <nav aria-label="Secciones principales" class="hero-nav">
+        <a href="#inicio">Inicio</a>
         <a href="#historia">Historia</a>
+        <a href="#fitito-cordobes">Fitito cordobés</a>
         <a href="#historia-club">El Club</a>
         <a href="#galeria">Galería</a>
-        <a href="#testimonios">Testimonios</a>
         <a href="#unite">Unite</a>
       </nav>
     </div>
@@ -87,6 +85,27 @@
       </div>
     </section>
 
+    <section id="fitito-cordobes" class="fitito-cordobes section--muted">
+      <div class="container" data-aos="fade-up">
+        <p class="fitito-cordobes__eyebrow" data-fitito-eyebrow></p>
+        <h2 class="section-title" data-fitito-title></h2>
+        <p class="fitito-cordobes__intro" data-fitito-intro></p>
+
+        <div class="fitito-cordobes__grid">
+          <div class="fitito-cordobes__highlights" data-fitito-highlights></div>
+          <aside class="fitito-cordobes__sidebar">
+            <h3 data-fitito-sidebar-title></h3>
+            <ul class="fitito-cordobes__facts" data-fitito-facts></ul>
+          </aside>
+        </div>
+
+        <div class="fitito-cordobes__footer">
+          <p data-fitito-footer></p>
+          <a href="#unite" class="btn btn-outline" data-fitito-cta></a>
+        </div>
+      </div>
+    </section>
+
     <section id="historia-club" class="club-story section--muted">
       <div class="container" data-aos="fade-up">
         <div class="club-story__header">
@@ -116,35 +135,19 @@
           Momentos compartidos, encuentros y la pasión por el Fitito que nos une.
         </p>
 
-        <h3 class="galeria-subtitle" data-aos="fade-right">Fotos del Club</h3>
-        <div class="galeria-grid" data-aos="fade-up" data-aos-delay="150">
-          <a href="images/club/IMG-20251013-WA0284.jpg" data-lightbox="club" data-title="Club · Img 20251013 Wa0284 Jpg">
-            <img src="images/club/IMG-20251013-WA0284.jpg" alt="Club: Img 20251013 Wa0284 Jpg" loading="lazy" data-fallback="images/placeholder.jpg">
-          </a>
-          <a href="images/club/vcp-2025-01.jpg" data-lightbox="club" data-title="Club · Vcp 2025 01 Jpg">
-            <img src="images/club/vcp-2025-01.jpg" alt="Club: Vcp 2025 01 Jpg" loading="lazy" data-fallback="images/placeholder.jpg">
-          </a>
+        <div class="gallery-intro">
+          <h3 class="galeria-subtitle" data-aos="fade-right">Álbumes curados del Club</h3>
+          <p class="gallery-intro__copy" data-aos="fade-up" data-aos-delay="120">
+            Organizamos nuestras fotos por álbumes para que cada encuentro, caravana y restauración tenga su espacio propio.
+            Soltá tus imágenes en la carpeta correspondiente y aparecerán automáticamente en el sitio al regenerar la galería.
+          </p>
         </div>
-      </div>
-    </section>
 
-    <section id="testimonios" class="section--muted">
-      <div class="container" data-aos="fade-up">
-        <h2 class="section-title">Historias de socios</h2>
-        <p>
-          Detrás de cada Fitito hay una familia, un viaje y un recuerdo imborrable. Estas voces reflejan por qué seguimos
-          escribiendo capítulos nuevos.
+        <div class="gallery-albums" data-gallery-albums data-aos="fade-up" data-aos-delay="150"></div>
+        <p class="mensaje-vacio gallery-empty" data-gallery-empty hidden>
+          No pudimos cargar los álbumes en este momento. Revisá que <code>content/gallery.json</code> exista o ejecutá
+          <code>node scripts/generate-gallery-manifest.js</code>.
         </p>
-
-        <p class="scroll-hint">
-          💬 Deslizá para ver más testimonios
-        </p>
-        
-        <div class="testimonios-container">
-          <div class="testimonios">
-            <!-- Los testimonios se cargarán dinámicamente desde content.json -->
-          </div>
-        </div>
       </div>
     </section>
 
@@ -245,6 +248,34 @@
     </section>
   </main>
 
+  <div class="gallery-viewer" id="gallery-viewer" role="dialog" aria-modal="true" aria-label="Visor de imágenes" aria-hidden="true">
+    <div class="gallery-viewer__overlay" data-gallery-close></div>
+    <div class="gallery-viewer__content">
+      <button class="gallery-viewer__close" type="button" aria-label="Cerrar visor" data-gallery-close>&times;</button>
+      <button class="gallery-viewer__nav gallery-viewer__nav--prev" type="button" aria-label="Imagen anterior" data-gallery-prev>&larr;</button>
+      <button class="gallery-viewer__nav gallery-viewer__nav--next" type="button" aria-label="Imagen siguiente" data-gallery-next>&rarr;</button>
+      <div class="gallery-viewer__stage">
+        <div class="gallery-viewer__spinner" aria-hidden="true"></div>
+        <img src="" alt="" class="gallery-viewer__image" loading="lazy">
+      </div>
+      <div class="gallery-viewer__meta">
+        <p class="gallery-viewer__caption"></p>
+        <p class="gallery-viewer__story"></p>
+        <dl class="gallery-viewer__details">
+          <div>
+            <dt>Ubicación</dt>
+            <dd class="gallery-viewer__detail" data-detail="lugar"></dd>
+          </div>
+          <div>
+            <dt>Fecha</dt>
+            <dd class="gallery-viewer__detail" data-detail="fecha"></dd>
+          </div>
+        </dl>
+        <p class="gallery-viewer__counter" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <p><strong>Club Fiat 600 Córdoba</strong> · 2000–2025 · Más que un auto, una familia.</p>
     <div class="social" aria-label="Redes sociales del club">
@@ -256,9 +287,11 @@
     <p class="footer-location">Reuniones habituales: Primer domingo de cada mes desde las 17:00 hs · Frente al Holiday Inn · Alto Verde · Córdoba · Argentina</p>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js" defer></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script src="js/gallery-viewer.js" defer></script>
+  <script src="js/gallery-data.js" defer></script>
+  <script src="js/gallery-albums.js" defer></script>
   <script src="js/content-fallback.js" defer></script>
   <script src="js/dynamic-content.js" defer></script>
 </body>

@@ -25,6 +25,36 @@
 }
 ```
 
+### `fitito_cordobes`
+```json
+{
+  "eyebrow": "string (opcional)",
+  "titulo": "string",
+  "intro": "string",
+  "highlights": [
+    {
+      "titulo": "string",
+      "texto": "string",
+      "detalle": "string (opcional)"
+    }
+  ],
+  "sidebar": {
+    "titulo": "string (opcional)",
+    "items": [
+      {
+        "titulo": "string",
+        "descripcion": "string"
+      }
+    ]
+  },
+  "footer": "string (opcional)",
+  "cta": {
+    "label": "string",
+    "href": "#ancla o URL absoluta"
+  }
+}
+```
+
 ### `testimonios`
 ```json
 [

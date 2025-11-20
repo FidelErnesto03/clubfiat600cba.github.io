@@ -61,6 +61,9 @@ class DynamicContentLoader {
         // Actualizar historia del club
         this.updateClubHistory();
 
+        // Actualizar sección Fitito cordobés
+        this.updateFititoCordobes();
+
         // Actualizar sección "Unite al Club"
         this.updateUniteSection();
         
@@ -73,6 +76,112 @@ class DynamicContentLoader {
         this.refreshAOS();
         
         console.log('✅ Contenido dinámico actualizado correctamente');
+    }
+
+    updateFititoCordobes() {
+        const section = document.getElementById('fitito-cordobes');
+        if (!section) {
+            return;
+        }
+
+        const data = this.contentData.fitito_cordobes;
+        if (!data) {
+            section.style.display = 'none';
+            return;
+        }
+
+        const setText = (selector, value) => {
+            const el = section.querySelector(selector);
+            if (!el) {
+                return;
+            }
+            if (value) {
+                el.textContent = value;
+                el.hidden = false;
+            } else {
+                el.hidden = true;
+            }
+        };
+
+        setText('[data-fitito-eyebrow]', data.eyebrow);
+        setText('[data-fitito-title]', data.titulo);
+        setText('[data-fitito-intro]', data.intro);
+        setText('[data-fitito-footer]', data.footer);
+
+        const cta = section.querySelector('[data-fitito-cta]');
+        if (cta) {
+            if (data.cta && data.cta.label) {
+                cta.textContent = data.cta.label;
+            } else {
+                cta.textContent = 'Sumate al club';
+            }
+            cta.href = (data.cta && data.cta.href) || '#unite';
+        }
+
+        const highlightsWrapper = section.querySelector('[data-fitito-highlights]');
+        if (highlightsWrapper) {
+            highlightsWrapper.innerHTML = '';
+            if (Array.isArray(data.highlights) && data.highlights.length > 0) {
+                data.highlights.forEach((highlight, index) => {
+                    const article = document.createElement('article');
+                    article.className = 'fitito-cordobes__highlight';
+                    article.setAttribute('data-aos', 'fade-up');
+                    article.setAttribute('data-aos-delay', String(120 + index * 80));
+
+                    if (highlight.titulo) {
+                        const h3 = document.createElement('h3');
+                        h3.textContent = highlight.titulo;
+                        article.appendChild(h3);
+                    }
+
+                    if (highlight.texto) {
+                        const p = document.createElement('p');
+                        p.textContent = highlight.texto;
+                        article.appendChild(p);
+                    }
+
+                    if (highlight.detalle) {
+                        const small = document.createElement('small');
+                        small.textContent = highlight.detalle;
+                        article.appendChild(small);
+                    }
+
+                    highlightsWrapper.appendChild(article);
+                });
+            }
+        }
+
+        const sidebar = section.querySelector('.fitito-cordobes__sidebar');
+        const sidebarTitle = section.querySelector('[data-fitito-sidebar-title]');
+        const factsList = section.querySelector('[data-fitito-facts]');
+        const sidebarData = data.sidebar || {};
+
+        if (sidebar && factsList) {
+            if (Array.isArray(sidebarData.items) && sidebarData.items.length > 0) {
+                sidebar.style.display = '';
+                if (sidebarTitle) {
+                    sidebarTitle.textContent = sidebarData.titulo || 'Postales cordobesas';
+                }
+
+                factsList.innerHTML = '';
+                sidebarData.items.forEach((item) => {
+                    const li = document.createElement('li');
+                    if (item.titulo) {
+                        const strong = document.createElement('strong');
+                        strong.textContent = item.titulo;
+                        li.appendChild(strong);
+                    }
+                    if (item.descripcion) {
+                        const span = document.createElement('span');
+                        span.textContent = item.descripcion;
+                        li.appendChild(span);
+                    }
+                    factsList.appendChild(li);
+                });
+            } else {
+                sidebar.style.display = 'none';
+            }
+        }
     }
 
     updateClubHistory() {
